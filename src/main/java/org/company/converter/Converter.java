@@ -13,10 +13,12 @@ import java.util.regex.Pattern;
  */
 public class Converter {
 
-    private TreeMap<Integer, String> rMap = new TreeMap<Integer, String>();
-    private HashMap<String, Integer> aMap = new HashMap<String, Integer>();
+    private TreeMap<Integer, String> rMap = new TreeMap<>();
+    private HashMap<String, Integer> aMap = new HashMap<>();
     private final Pattern ROMAN_FORMAT_MATCHER =
             Pattern.compile("^(M{0,3})(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$");
+    static final int MIN_NUMBER = 1;
+    static final int MAX_NUMBER = 3999;
 
     public Converter() {
         rMap.put(1000, "M");
@@ -72,9 +74,9 @@ public class Converter {
      * @throws IllegalArgumentException - thrown if entered number is out of defined range
      */
     public final String convertArabicToRoman(int number) throws IllegalArgumentException {
-        if (number < 1 || number > 3999)
-            throw new IllegalArgumentException("Verify that number from 1 to 3999.");
-        StringBuilder romanNumber;
+        if (number < MIN_NUMBER || number > MAX_NUMBER)
+            throw new IllegalArgumentException("Invalid number: allowable range from 1 to 3999.");
+
         int index = rMap.floorKey(number);
         if (index == number) {
             return rMap.get(index);

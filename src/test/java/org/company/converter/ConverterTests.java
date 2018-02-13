@@ -170,11 +170,19 @@ public class ConverterTests {
         assertThat(converter.convertRomanToArabic("XXII")).isEqualTo(22);
     }
 
+    /**
+     * Test verifies that if entered string consists of 5 digits (2 higher digit that follows 3 lower digits) then
+     * method convertArabicToRoman converts string to number successfully
+     */
     @Test
     public void methodConvertRomanToArabicCheckXXIII() {
         assertThat(converter.convertRomanToArabic("XXIII")).isEqualTo(23);
     }
 
+    /**
+     * Test verifies that if entered string consists of 4 digits (2 higher digit that follows 1 lower digit that follows
+     * 1 higher digit that lower than first 2 digits) then method convertArabicToRoman converts string to number successfully
+     */
     @Test
     public void methodConvertRomanToArabicCheckXXIV() {
         assertThat(converter.convertRomanToArabic("XXIV")).isEqualTo(24);
@@ -206,26 +214,6 @@ public class ConverterTests {
     }
 
     @Test
-    public void methodConvertRomanToArabicCheckLXVI() {
-        assertThat(converter.convertRomanToArabic("LXVI")).isEqualTo(66);
-    }
-
-    @Test
-    public void methodConvertRomanToArabicCheckCLXVI() {
-        assertThat(converter.convertRomanToArabic("CLXVI")).isEqualTo(166);
-    }
-
-    @Test
-    public void methodConvertRomanToArabicCheckDCLXVI() {
-        assertThat(converter.convertRomanToArabic("DCLXVI")).isEqualTo(666);
-    }
-
-    @Test
-    public void methodConvertRomanToArabicCheckMDLXVI() {
-        assertThat(converter.convertRomanToArabic("MDCLXVI")).isEqualTo(1666);
-    }
-
-    @Test
     public void methodConvertRomanToArabicCheckXL() {
         assertThat(converter.convertRomanToArabic("XL")).isEqualTo(40);
     }
@@ -238,6 +226,11 @@ public class ConverterTests {
     @Test
     public void methodConvertRomanToArabicCheckLX() {
         assertThat(converter.convertRomanToArabic("LX")).isEqualTo(60);
+    }
+
+    @Test
+    public void methodConvertRomanToArabicCheckLXVI() {
+        assertThat(converter.convertRomanToArabic("LXVI")).isEqualTo(66);
     }
 
     @Test
@@ -256,6 +249,11 @@ public class ConverterTests {
     }
 
     @Test
+    public void methodConvertRomanToArabicCheckCLXVI() {
+        assertThat(converter.convertRomanToArabic("CLXVI")).isEqualTo(166);
+    }
+
+    @Test
     public void methodConvertRomanToArabicCheckCD() {
         assertThat(converter.convertRomanToArabic("CD")).isEqualTo(400);
     }
@@ -266,6 +264,11 @@ public class ConverterTests {
     }
 
     @Test
+    public void methodConvertRomanToArabicCheckDCLXVI() {
+        assertThat(converter.convertRomanToArabic("DCLXVI")).isEqualTo(666);
+    }
+
+    @Test
     public void methodConvertRomanToArabicCheckCM() {
         assertThat(converter.convertRomanToArabic("CM")).isEqualTo(900);
     }
@@ -273,6 +276,11 @@ public class ConverterTests {
     @Test
     public void methodConvertRomanToArabicCheckM() {
         assertThat(converter.convertRomanToArabic("M")).isEqualTo(1000);
+    }
+
+    @Test
+    public void methodConvertRomanToArabicCheckMDLXVI() {
+        assertThat(converter.convertRomanToArabic("MDCLXVI")).isEqualTo(1666);
     }
 
     /**
@@ -384,7 +392,7 @@ public class ConverterTests {
      */
     @Test
     public void checkAllNumbers(){
-        for (int i = 1; i < 4000; i++){
+        for (int i = Converter.MIN_NUMBER; i <= Converter.MAX_NUMBER; i++){
             assertThat(converter.convertRomanToArabic(converter.convertArabicToRoman(i))).isEqualTo(i);
         }
     }
