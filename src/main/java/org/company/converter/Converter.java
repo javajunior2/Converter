@@ -13,35 +13,35 @@ import java.util.regex.Pattern;
  */
 public class Converter {
 
-    private TreeMap<Integer, String> rMap = new TreeMap<>();
-    private HashMap<String, Integer> aMap = new HashMap<>();
+    private TreeMap<Integer, String> arabicRomanMap = new TreeMap<>();
+    private HashMap<String, Integer> romanArabicMap = new HashMap<>();
     private final Pattern ROMAN_FORMAT_MATCHER =
             Pattern.compile("^(M{0,3})(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$");
     static final int MIN_NUMBER = 1;
     static final int MAX_NUMBER = 3999;
 
     public Converter() {
-        rMap.put(1000, "M");
-        rMap.put(900, "CM");
-        rMap.put(500, "D");
-        rMap.put(400, "CD");
-        rMap.put(100, "C");
-        rMap.put(90, "XC");
-        rMap.put(50, "L");
-        rMap.put(40, "XL");
-        rMap.put(10, "X");
-        rMap.put(9, "IX");
-        rMap.put(5, "V");
-        rMap.put(4, "IV");
-        rMap.put(1, "I");
+        arabicRomanMap.put(1000, "M");
+        arabicRomanMap.put(900, "CM");
+        arabicRomanMap.put(500, "D");
+        arabicRomanMap.put(400, "CD");
+        arabicRomanMap.put(100, "C");
+        arabicRomanMap.put(90, "XC");
+        arabicRomanMap.put(50, "L");
+        arabicRomanMap.put(40, "XL");
+        arabicRomanMap.put(10, "X");
+        arabicRomanMap.put(9, "IX");
+        arabicRomanMap.put(5, "V");
+        arabicRomanMap.put(4, "IV");
+        arabicRomanMap.put(1, "I");
 
-        aMap.put("M", 1000);
-        aMap.put("D", 500);
-        aMap.put("C", 100);
-        aMap.put("L", 50);
-        aMap.put("X", 10);
-        aMap.put("V", 5);
-        aMap.put("I", 1);
+        romanArabicMap.put("M", 1000);
+        romanArabicMap.put("D", 500);
+        romanArabicMap.put("C", 100);
+        romanArabicMap.put("L", 50);
+        romanArabicMap.put("X", 10);
+        romanArabicMap.put("V", 5);
+        romanArabicMap.put("I", 1);
     }
 
     /**
@@ -60,7 +60,7 @@ public class Converter {
         int temp = 0;
         int length = number.length();
         for (int i = (length - 1); i >= 0; i--) {
-            temp = aMap.get(number.substring(i, i + 1));
+            temp = romanArabicMap.get(number.substring(i, i + 1));
             arabicNumber += (temp < prev) ? -temp : temp;
             prev = temp;
         }
@@ -77,11 +77,11 @@ public class Converter {
         if (number < MIN_NUMBER || number > MAX_NUMBER)
             throw new IllegalArgumentException("Invalid number: allowable range from 1 to 3999.");
 
-        int index = rMap.floorKey(number);
+        int index = arabicRomanMap.floorKey(number);
         if (index == number) {
-            return rMap.get(index);
+            return arabicRomanMap.get(index);
         }
-        return rMap.get(index) + convertArabicToRoman(number - index);
+        return arabicRomanMap.get(index) + convertArabicToRoman(number - index);
     }
 
 }
