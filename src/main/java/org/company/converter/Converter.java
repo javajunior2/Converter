@@ -60,7 +60,7 @@ public class Converter {
         int temp = 0;
         int length = number.length();
         for (int i = (length - 1); i >= 0; i--) {
-            temp = aMap.get(String.valueOf(number.charAt(i)));
+            temp = aMap.get(number.substring(i, i + 1));
             arabicNumber += (temp < prev) ? -temp : temp;
             prev = temp;
         }
